@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+    Author: Ethan Maynes [[ Health Insurance Risk Calculator (Web Ver.) ]]
+-->
+    <head>
+        <meta charset="UTF-8">
+        <title>Health Insurance Risk Calculator</title>
+        <style>
+          body {
+            background-image: url('Sprint7ProjectPicture.jpeg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+          }
+          </style>
+    </head>
+
+
+    <body>
+        <h1>Health Insurance Risk Calculator</h1>
+        <p>How to use the Calculator:</p>
+        <p>Input or select an option from each menu prompt.</p>
+        <p>Once completed, your risk amount will be determined below and should give you an idea of what kind of insurance plan 
+            would best fit you.
+        </p>
+        <br />
+
+        <label>First, let's  confirm your age.</label>
+        <br /> <br />
+        <input type="number" placeholder="Age" min="0" max="100">
+        <br /> <br />
+
+        <h1>Blood Pressure Categories</h1>
+
+
+        <!-- Reference for HTML "option" tabs/fields: http://www.w3schools.com/tags/tag_option.asp -->
+
+        <label>Using your blood pressure results, utilize the dropdown menus to find your correct categories.</label><br />
+        <label>The first dropdown menu will be for the Systolic(First Value) and the second for the Diastolic(Second Value).</label>
+        <br /> <br />
+        <select id="Systolic">
+          <option value="0">Less than 120</option>
+          <option value="15">120-129</option>
+          <option value="30">130-139</option>
+          <option value="75">140 or Higher</option>
+          <option value="100">Higher than 180</option>
+        </select>
+        <br /><br />
+
+        <select id="Diastolic">
+            <option value="15">Less than 80</option>
+            <option value="30">80-89</option>
+            <option value="75">90 or Higher</option>
+            <option value="100">Higher than 120</option>
+          </select>
+          <br /><br />
+
+        <h1>Calculating Body Mass Index</h1>
+
+        <label>You will now be asked a series of questions that will  help determine your BMI.</label>
+        <br /><br />
+
+        <label>Please select your height.</label>
+        <br /><br />
+        <select id="Height">
+            <option value="1">4'2" or Shorter</option>
+            <option value="2">4'3"</option>
+            <option value="3">4'4"</option>
+            <option value="4">4'5"</option>
+            <option value="5">4'6"</option>
+            <option value="6">4'7"</option>
+            <option value="7">4'8"</option>
+            <option value="8">4'9"</option>
+            <option value="9">4'10"</option>
+            <option value="10">4'11"</option>
+            <option value="11">5'1"</option>
+            <option value="12">5'2"</option>
+            <option value="13">5'3"</option>
+            <option value="14">5'4"</option>
+            <option value="15">5'5"</option>
+            <option value="16">5'6"</option>
+            <option value="17">5'7"</option>
+            <option value="18">5'8"</option>
+            <option value="19">5'9"</option>
+            <option value="20">5'10"</option>
+            <option value="21">5'11"</option>
+            <option value="22">6'1" or Higher</option>
+          </select>
+          <br /><br />
+          
+
+          <label>Please select your approx. weight from the dropdown menu</label>
+          <br /><br />
+          <select id="Weight">
+              <option value="90">Less than 90</option>
+              <option value="100">100</option>
+              <option value="120">120</option>
+              <option value="130">130</option>
+              <option value="140">140</option>
+              <option value="150">150</option>
+              <option value="160">160</option>
+              <option value="170">170</option>
+              <option value="180">180</option>
+              <option value="190">190</option>
+              <option value="200">200</option>
+              <option value="210">210</option>
+              <option value="220">Higher than 220</option>
+          </select>
+          <br /><br />
+
+          <button onclick="calculateBMI()">calculateBMI</button>
+	        <p id="BMIResults"></p>
+
+    <script>
+        console.log("Calculating health risk...");
+        
+        function calculateRisk() {
+            console.log("calculateRisk()");
+
+            // Get the blood pressure value.
+            let SystolicValue = parseInt(document.getElementById("Systolic").selectedOptions[0].value);
+	console.log("SystolicValue = " + SystolicValue);
+            let DiastolicValue = parseInt(document.getElementById("Diastolic").selectedOptions[0].value);
+	console.log("DiastolicValue = " + DiastolicValue);
+
+
+    // Calculate BMI
+
+    function BMI(height, weight) {
+	return (703 * weight) / (height * height)
+}
+
+function calculateBMI() {
+    console.log("calculateBMI()")
+	let heightValueInInches = parseInt(document.getElementById("Height").selectedOptions[0].value);
+	let weightValueInLbs = parseInt(document.getElementById("Weight").selectedOptions[0].value);
+
+	console.log("Height="+heightValueInInches+" and weight="+weightValueInLbs);
+
+	let bmiValue = BMI(heightValueInInches, weightValueInLbs)
+	console.log("BMI="+bmiValue)
+
+	// Rounding bmi to one decimal.
+	bmiValue = Math.round(bmiValue*10)/10
+	console.log("BMI="+bmiValue)
+
+	document.getElementById("BMIResults").innerHTML = "Your estimated BMI: " + bmiValue;
+
+}
+
+</script>
+</body>
+</html>
